@@ -23,3 +23,9 @@ Each part of your life gets its own Claude Cowork scheduled session. Each one ge
 That's one area of life. Now multiply it.
 
 You can run 5, 10, 20 of these — one for email outreach, one for research, one for scheduling, one for client follow-ups — each with its own memory, its own rules, its own schedule. They don't interfere with each other because they each have their own space. But you can control which domains to share which context with.
+
+## Creating a New Domain
+
+Want to add a new area of your life? You don't have to build anything from scratch.
+
+A meta-skill (just another text file) walks you through it: "What's this domain about? What should the session track? What rules should it follow?" It creates the state file and domain specific skill file for you(to enforce the rules). New domain in 2 minutes. Cowork will create scheduled sessions through natural language — just tell it what you want and when. No cron syntax. No config files.
