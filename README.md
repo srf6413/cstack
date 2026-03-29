@@ -161,6 +161,29 @@ Schedule: every 4 hours, 9am–9pm.
 
 That's a running agent. Change "leads" to anything — content, hiring, client delivery, finances. Same pattern.
 
+
+## Setting Up the Heartbeat
+
+The heartbeat is just another agent — but instead of doing domain work, it reads everyone else's state files, and notifies you at the end if you haven't been notified once already.
+
+Paste this into a Claude Cowork session:
+```
+You are the heartbeat agent. Your only job is to check on all my other agents.
+
+Here are the state files you monitor:
+[list your state file locations here]
+
+Every time you run:
+1. Read each state file
+2. Find anything marked "needs human," "blocked," or "waiting for approval"
+3. Send me one summary of what needs me. If nothing needs me, say nothing.
+4. Never modify another agent's state file. Read only.
+
+Schedule: every 30 minutes.
+```
+
+That's it. Add new state files to the list as you create new agents. The heartbeat doesn't need to know what each agent does — it just scans for anything stuck.
+
 ---
 
 *[@sauloferreira64](https://x.com/sauloferreira64)*
