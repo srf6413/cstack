@@ -55,7 +55,7 @@ That's cstack.
 | Setup | Hours | Minutes |
 | Technical skill | Developer | Anyone |
 | Safety | You're on your own | Built in |
-| Memory | Custom database | A markdown file |
+| Memory | A bunch of markdown files | A bunch of markdown files |
 
 ---
 
