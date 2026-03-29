@@ -50,7 +50,7 @@ That's cstack.
 
 | | OpenClaw | cstack |
 |---|---------|--------|
-| Computer control | Full desktop (unsafe) | None |
+| Computer control | Full desktop (unsafe) | Sandboxed with Cowork's Safeguards |
 | Infrastructure | Custom framework | None |
 | Setup | Hours | Minutes |
 | Technical skill | Developer | Anyone |
