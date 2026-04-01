@@ -1,72 +1,32 @@
-# No Claw Needed
-
-Autonomous agents. Just Claude.
-
----
-
-OpenClaw proved everyone wants autonomous agents. But it's unsafe, it's complex, and it requires real technical knowledge to set up.
-
-You don't need any of that. You already have everything.
-
-## The Pattern
-
-Each domain of your life gets its own Claude Cowork scheduled session. Each one has:
-
-1. **A state file** — a Notion page (or markdown file) where the session writes what it's working on, what's blocked, and what happened. It reads this every time it wakes up. That's how it remembers.
-2. **A skill file** — a text file with the rules. "Read your state first. Do your work. Write what you did. Reach out if urgent."
-3. **A schedule** — the session wakes up on its own. Every hour, every morning, once a week. It picks up where it left off.
-4. **A way to reach you** — if something is urgent, it texts you, pings your Discord, whatever you use. You answer when you want. It keeps working.
-
-That's one domain. Now multiply it.
-
-Run 5, 10, 20 of these. One for outreach, one for research, one for scheduling, one for client follow-ups. Each with its own memory, its own rules, its own schedule. They don't interfere because they don't share space. But you control what context flows between them.
-
-You just spun up an entire digital department — a researcher, an outreach person, an inbox manager, a scheduler — with zero server overhead. The barrier went from "$50,000 for a developer" to "an afternoon of writing prompts."
-
-## The Heartbeat
-
-How do you know what needs you?
-
-One session checks all the others. It reads every state file, finds anything marked "needs human," and sends you one summary:
-
-> "Gig outreach is stuck on a venue that hasn't replied. Content agent finished 3 drafts. Client follow-up needs you to approve a message."
-
-If everything's green, you hear nothing.
-
-## New Domain in 2 Minutes
-
-A meta-skill walks you through it: "What's this about? What should it track? What rules?" It creates the state file and skill file. Tell Cowork when to run it. Done.
-
-## Why This Matters
-
-Until now, building an AI agent was an engineering problem — API keys, servers, Python scripts, debugging. This flips it into a design problem. If you can describe how your workflow works in plain English, you can build an agent. You're not writing code. You're writing job descriptions.
-
-One person. Ten agents. Each one running on its own schedule, maintaining its own memory, contacting you only when it's stuck.
-
-No framework. No infrastructure. No code. Just Claude.
-
-That's **cstack**.
+# Autonomous agents. Just Claude.
+### No Claw Needed
 
 ---
 
-|                   | OpenClaw                         | cstack                              |
-| ----------------- | -------------------------------- | ----------------------------------- |
-| Computer control  | Full desktop (unsafe)            | Sandboxed with Cowork's safeguards  |
-| Infrastructure    | Custom framework                 | None                                |
-| Setup             | Hours                            | Minutes                             |
-| Technical skill   | Developer                        | Anyone                              |
-| Safety            | You're on your own               | Built in                            |
-| Memory            | A bunch of markdown files        | A bunch of markdown files           |
+## What You're Getting
+
+A team of autonomous agents — one per area of your life or work — each running on its own schedule, keeping its own memory, doing real work while you're not watching.
+
+Not a chatbot. Not a one-shot task runner. Agents that wake up every morning (or every hour, or once a week), pick up where they left off, and keep moving.
+
+Each agent handles an open-ended domain — not just a fixed checklist, but ongoing work that evolves: a pipeline that keeps growing, research that keeps accumulating, relationships that need nurturing, content that keeps shipping. The agent figures out what matters next. You only get pulled in when it actually matters.
+
+**The perfect amount of human in the loop — by design.**
+
+Urgent blocker? The agent pings you immediately — Discord, email, wherever you want. Can't proceed without you, stops everything and waits. Non-urgent? It adds it to a digest. Once a day (or once a session), you get a short summary: three things that need a decision, a message to approve, a call to make. You unblock them in five minutes and walk away. Everything else, the agent handles.
+
+**Dispatch is the control plane.** Claude's Dispatch feature is the one place to manage all your agents from. Start a session immediately without waiting for the schedule. Check what any agent is doing right now. Change a schedule, update a rule, tell an agent to pivot. You never have to open a config file or restart anything. Just leave Cowork running on your computer — you can leave the house, and your agents keep working. Dispatch is how you reach them.
 
 ---
 
 ## Try It Right Now
 
-Paste this into a Claude Cowork session or claude.ai. Answer six questions. You'll have a running agent in 2 minutes.
+Paste this into a Claude Cowork session or claude.ai. Answer six questions. You'll have a running agent in under 5 minutes.
+
+**You'll need a free Notion account** — that's where your agent stores its memory. If you don't have one, [create it here](https://www.notion.so) before you start. Everything else runs inside Claude.
 
 ```
 You are helping me create a new autonomous agent for a domain in my life or work.
-
 Ask me these questions one at a time:
 
 1. What domain is this for? (e.g., DJ gig booking, content calendar, project tracking, hiring, client follow-ups)
@@ -78,7 +38,7 @@ Ask me these questions one at a time:
 
 After I answer, create these three files:
 
-**1. State file** — a Notion page (or markdown file) with this structure:
+**1. State file** — a Notion page with this structure:
    - A Session Lock at the top (Status: IDLE/IN_PROGRESS, Last Agent, Timestamp).
      This prevents two sessions from writing at the same time.
    - An Agent Status section (what the agent did last time, what it needs from you)
@@ -99,15 +59,76 @@ After I answer, create these three files:
 Present all three for me to review. Keep the language plain — no jargon.
 ```
 
-That's it. You now have a state file, a skill file, and a schedule. Your agent wakes up, reads its state, does work, writes back what happened, and goes to sleep. Repeat forever.
+That's it. You get a state file, a skill file, and a schedule. Your agent wakes up, reads its memory, does work, writes back what happened, and goes to sleep. Repeat forever.
 
-Want a second agent? Run the prompt again for a different domain. They don't interfere — each one has its own state, its own rules, its own schedule.
+---
 
-## Example: What the Agent Actually Produces
+## What This Actually Is
 
-When you tell the prompt "DJ gig booking agent, tracks venues I've contacted and new spots to reach out to, can research venues and draft messages but never send them, ping me on Discord when something needs me, run every morning" — here's what you get:
+Imagine you hired someone for every area of your life. Each person has a notebook — that's their memory. A job description — those are their rules. A shift they show up for. And one instruction: "Text me only if something is actually stuck. Everything else, handle it."
 
-### State file (your agent's memory)
+That's cstack. The notebook is a Notion page. The job description is a text file. The shift is a Cowork schedule. The text message is a Discord ping or email.
+
+One person handles outreach. One handles research. One manages your inbox. One tracks client deliverables. They don't interfere with each other — each has their own notebook, their own rules, their own hours. You just built a digital department.
+
+No servers. No code. No API keys. No terminal.
+
+---
+
+## The Heartbeat (Your Daily Digest)
+
+Urgent things surface immediately — the agent that's blocked pings you the moment it gets stuck. But the non-urgent stuff? It stacks up in a digest.
+
+One extra agent reads everyone else's notebooks every 30 minutes and sends you one summary when anything needs a decision:
+
+> "Gig outreach is stuck on a venue that hasn't replied. Content agent finished 3 drafts. Client follow-up needs you to approve a message."
+
+You spend five minutes unblocking everything. If nothing needs you, you hear nothing.
+
+Paste this to set it up:
+
+```
+You are the heartbeat agent. Your only job is to check on all my other agents.
+
+Here are the state files you monitor:
+[list your state file locations here]
+
+Every time you run:
+1. Read each state file
+2. Look at the Agent Status section — find anything that says "Needs Human"
+3. Send me one summary of what needs me. If nothing needs me, say nothing.
+4. Never modify another agent's state file. Read only.
+
+Schedule: every 30 minutes.
+```
+
+Add new state files as you create new agents. Done.
+
+---
+
+## Dispatch: The Control Plane
+
+Scheduled agents are set-and-forget — but sometimes you want to reach in. That's what Dispatch is for.
+
+Dispatch is Claude's built-in way to start, inspect, and adjust any running session without touching config files or restarting anything. Think of it the way OpenClaw users think of their gateway — the one place everything goes through.
+
+With Dispatch you can:
+- **Fire a session immediately** — don't wait for the scheduled run, start it now
+- **Check what any agent is doing** — read its last run, see what it flagged
+- **Change a rule on the fly** — tell an agent to pause outreach, switch priority, or handle a new situation
+- **Adjust a schedule** — switch from daily to hourly while something's moving fast, then back
+
+You don't have to be at your computer for any of this. Leave Cowork running, walk out the door, and your agents keep working their schedules. When one needs you, it pings you. When you want to check in or redirect one, open Dispatch from your phone. That's the whole system.
+
+---
+
+## What the Agent Actually Produces
+
+Tell the setup prompt: *"DJ gig booking agent, tracks venues I've contacted and new spots to reach out to, can research venues and draft messages but never send them, ping me on Discord when something needs me, run every morning."*
+
+Here's what comes out:
+
+**State file (the agent's memory)**
 
 ```markdown
 # DJ Gig Booking — State
@@ -119,11 +140,12 @@ When you tell the prompt "DJ gig booking agent, tracks venues I've contacted and
 
 ## Agent Status
 **Last Run:** 2026-03-28 9:00am
-**Summary:** Researched 4 new venues in SF. Drafted intro for The Independent. Waiting on
-human approval to send. No reply yet from Milk Bar (5 days).
+**Summary:** Researched 4 new venues in SF. Drafted intro for The Independent.
+Waiting on human approval to send. No reply yet from Milk Bar (5 days).
 **Needs Human:** Yes — approve outreach draft for The Independent
 
 ## Venues — Active Outreach
+
 ### The Independent
 **Status:** Draft Ready
 **Current Blocker:** Waiting for human to approve outreach message
@@ -144,32 +166,29 @@ human approval to send. No reply yet from Milk Bar (5 days).
 **Status:** Active
 **Next Action:** Research 5 more venues in Oakland/Berkeley with hip-hop nights
 **Running Log:**
-- [2026-03-28] Found 4 SF venues matching criteria. Added The Independent, Brick & Mortar,
-  The Knockout, and Amnesia. Prioritized by fit.
+- [2026-03-28] Found 4 SF venues matching criteria.
 - [2026-03-27] Researched 3 venues. 1 was permanently closed, 2 added to pipeline.
 ```
 
-### Skill file (your agent's rules)
+**Skill file (the agent's rules)**
 
 ```markdown
 # DJ Gig Booking Agent
 
-You are the DJ gig booking agent. Keep the pipeline moving — find venues, draft outreach,
-follow up on leads, and flag anything that needs a human decision.
+You are the DJ gig booking agent. Keep the pipeline moving.
 
 ## Session Start
 1. Read the state file. Check the Session Lock.
    - If another session is IN_PROGRESS and the timestamp is less than 20 minutes old, EXIT.
    - Otherwise, set lock to IN_PROGRESS with your session name and current time.
 2. Read the Agent Status section to remember what happened last time.
-3. Load all venue sections.
 
 ## Each Tick
-1. Active outreach first — check for replies, flag any that need human action.
+1. Active outreach first — check for replies, flag anything that needs human action.
 2. Follow-ups — if a venue hasn't replied in 7 days, draft a follow-up.
-3. Research — if outreach queue is low, find new venues that match the criteria.
-4. Update the state file with everything you did.
-5. Update Agent Status with a plain-English summary and whether you need the human.
+3. Research — if outreach queue is low, find new venues.
+4. Update the state file with what you did.
+5. Update Agent Status: plain-English summary + whether you need the human.
 
 ## Session End
 1. Write all changes to state file.
@@ -182,52 +201,67 @@ follow up on leads, and flag anything that needs a human decision.
 - Make up venue details or contact info
 ```
 
-### Scheduled task prompt
+**Scheduled task prompt**
 
 ```
 You are the DJ gig booking agent.
 Read the skill file and follow its protocol.
-Research venues, draft outreach, and track follow-ups.
-Never send anything without my approval — flag it and I'll review.
+Research venues, draft outreach, track follow-ups.
+Never send anything without my approval.
 Update the state file when done.
 Schedule: every morning, 9am.
 ```
 
-That's a running agent. It wakes up every morning, checks which venues need follow-ups, researches new ones, drafts messages, and writes everything down. You just review what it found and approve what goes out.
+It wakes up every morning. Checks follow-ups. Researches new venues. Drafts messages. Writes everything down. You review and approve. That's the whole loop.
 
-Change "gig booking" to anything — hiring, client delivery, content planning, finances. Same pattern, same structure.
+---
 
-## Setting Up the Heartbeat
+## How It Works (The Technical Bit)
 
-The heartbeat is just another agent — but instead of doing domain work, it reads everyone else's state files and tells you what needs you.
+Each agent has three pieces:
 
-Paste this into a Claude Cowork session:
+**1. A state file** — a Notion page. It reads this every session to remember what it was doing. It writes back at the end. That's the memory. No database, no vector store, no embeddings. Notion is free, works in any browser, and Claude can read and write to it natively — no integration setup required.
 
-```
-You are the heartbeat agent. Your only job is to check on all my other agents.
+**2. A skill file** — a text file with rules. "Read your state first. Work on the highest-priority item. Write what you did. Reach out only if something is actually stuck." The agent reads this at the start of every session. That's the identity.
 
-Here are the state files you monitor:
-[list your state file locations here]
+**3. A schedule** — a Cowork scheduled session. Every hour, every morning, once a week. The session fires, the agent reads its state, does work, writes back, sleeps. No server running between sessions. No process to keep alive.
 
-Every time you run:
-1. Read each state file
-2. Look at the Agent Status section — find anything that says "Needs Human"
-3. Send me one summary of what needs me. If nothing needs me, say nothing.
-4. Never modify another agent's state file. Read only.
+**The session lock** is the one piece of real engineering. If two sessions fire at the same time (it happens), they'd both try to write the state file simultaneously and corrupt it. So the agent checks a lock at the top of the file: if another session is IN_PROGRESS and the timestamp is under 20 minutes old, it exits immediately. Otherwise it sets the lock, does its work, and releases it. That's it — distributed coordination in five lines of markdown.
 
-Schedule: every 30 minutes.
-```
+**Domain isolation is by design.** Agents don't share state files, so they can't interfere with each other. If you want context to flow between them (e.g., your research agent feeds leads to your outreach agent), you define that explicitly in the skill file. Isolation is the default. Cross-domain context is opt-in.
 
-That's it. Add new state files to the list as you create new agents. The heartbeat doesn't need to know what each agent does — it just scans for anything stuck.
+**Human-in-the-loop is the architecture, not a limitation.** The human is the quality layer, the approval gate, the final judgment on anything irreversible. The agent handles the volume. You handle the decisions. That's not a missing feature — that's the design.
+
+---
+
+## Why Not OpenClaw?
+
+| | OpenClaw | cstack |
+|---|---|---|
+| Computer control | Full desktop (unsafe) | Sandboxed with Cowork's safeguards |
+| Browser use | Build flows manually with Playwright | Claude Chrome connector — plain English, safety precautions built in |
+| Infrastructure | Custom framework | None |
+| Setup | Hours | Minutes |
+| Technical skill | Developer | Anyone |
+| Safety | You're on your own | Built in |
+| Memory | A bunch of markdown files | A bunch of markdown files |
+
+OpenClaw proved everyone wants autonomous agents. It also proved that handing an AI agent unrestricted access to your computer is a security disaster — 12% of its plugin registry contained malicious code, multiple CVEs in the 8+ CVSS range, Kaspersky and Cisco both published "don't use this" advisories.
+
+cstack is the same idea with the unsafe parts removed. Cowork's sandboxed shell means the agent can't touch files it isn't supposed to. You approve before anything irreversible happens. And you don't need a developer to set it up.
+
+---
 
 ## The Real Shift
 
-When a new AI tool drops, it's easy to get hypnotized by terminals and frameworks. But 99% of knowledge workers — marketers, writers, managers, freelancers — will never open a terminal.
+Until now, building an AI agent was an engineering problem — API keys, servers, Python scripts, debugging. This flips it into a design problem.
 
-If a solution requires typing `npm install`, you've already lost 95% of the people who actually need it.
+99% of knowledge workers — marketers, writers, managers, freelancers — will never open a terminal. If the solution requires typing `npm install`, you've already lost 95% of the people who actually need this. cstack runs entirely inside tools you already have: a browser and Notion.
 
-cstack operates entirely inside tools you already know: a browser and Notion. If you can write a job description in plain English, you can build an autonomous agent. That's not a hack. That's the actual future — and it belongs to everyone, not just developers.
+If you can write a job description in plain English, you can build an autonomous agent. That's not a hack. That's the actual future — and it belongs to everyone, not just developers.
 
 ---
+
+*cstack is an open pattern, not a product*
 
 *[@sauloferreira64](https://x.com/sauloferreira64)*
