@@ -1,4 +1,4 @@
-# Autonomous agents. Just Claude.
+# Run Autonomous AI Agents With No Code, No Servers, Just Claude
 
 Imagine you hired someone for every area of your life. Each person has a notebook — that's their memory. A job description — those are their rules. A shift they show up for. And one instruction: *"Reach out only if something is actually stuck. Everything else, handle it."*
 
