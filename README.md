@@ -1,5 +1,4 @@
 # Autonomous agents. Just Claude.
-### No Claw Needed
 
 ---
 
