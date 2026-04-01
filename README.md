@@ -12,7 +12,7 @@ Each agent handles an open-ended domain — not just a fixed checklist, but ongo
 
 **The perfect amount of human in the loop — by design.**
 
-Urgent blocker? The agent pings you immediately — Discord, email, wherever you want. Can't proceed without you, stops everything and waits. Non-urgent? It adds it to a digest. Once a day (or once a session), you get a short summary: three things that need a decision, a message to approve, a call to make. You unblock them in five minutes and walk away. Everything else, the agent handles.
+Urgent blocker? The agent pings you immediately — Discord, email, wherever you want. Can't proceed without you, stops everything and waits. Already told you about something? It won't keep pinging you about it. All green? You hear nothing. You unblock what needs you, walk away, and everything else keeps moving.
 
 **Dispatch is the control plane.** Claude's Dispatch feature is the one place to manage all your agents from. Start a session immediately without waiting for the schedule. Check what any agent is doing right now. Change a schedule, update a rule, tell an agent to pivot. You never have to open a config file or restart anything. Just leave Cowork running on your computer — you can leave the house, and your agents keep working. Dispatch is how you reach them.
 
@@ -76,13 +76,21 @@ No servers. No code. No API keys. No terminal.
 
 ## The Heartbeat (Your Daily Digest)
 
-Urgent things surface immediately — the agent that's blocked pings you the moment it gets stuck. But the non-urgent stuff? It stacks up in a digest.
+One extra agent reads everyone else's notebooks every 30 minutes. Here's how it decides when to bother you:
 
-One extra agent reads everyone else's notebooks every 30 minutes and sends you one summary when anything needs a decision:
+**New blocker** — something is stuck that wasn't stuck last time. You get pinged.
+
+**Already reported** — it won't keep notifying you about the same thing.
+
+**Everything green** — nothing sent at all.
+
+The result: you only hear about something once until it changes. When you unblock it, it goes quiet.
+
+When something does need you, the message is plain:
 
 > "Gig outreach is stuck on a venue that hasn't replied. Content agent finished 3 drafts. Client follow-up needs you to approve a message."
 
-You spend five minutes unblocking everything. If nothing needs you, you hear nothing.
+Five minutes to unblock everything. Then walk away.
 
 Paste this to set it up:
 
