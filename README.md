@@ -4,7 +4,7 @@ Imagine you hired someone for every area of your life. Each person has a noteboo
 
 That's cstack. The notebook is a Notion page. The job description is a text file. The shift is a scheduled Claude session. No servers. No code. No API keys. No terminal.
 
-If you can write a job description in plain English, you can build this.
+If you can write a job description in plain English, you can have an autonomous agent.
 
 ---
 
