@@ -133,6 +133,7 @@ cstack is designed to reduce risk for normal business workflows:
 - **Lease lock:** lock owner + expiry + heartbeat reduce overlapping writes.
 - **Decision gates:** policy prompts that require approval for send/spend/delete actions; treat these as governance controls, not hard enforcement.
 - **Kill switch:** disable the schedule and the loop stops.
+- **Human review is by design:** for high-stakes state in Notion SSOTs and rule files, a human should review and approve critical updates rather than hiding compaction and consolidation behind an opaque runtime.
 
 This is safer by design for most operator workflows, but you should still treat state, transcripts, and credentials as sensitive data.
 
@@ -201,6 +202,15 @@ Where this model breaks:
 - discrete runs are less responsive than truly continuous processing for real-time flows
 
 Bottom line: cstack maximizes explicit cognition for reliability and inspectability; it deliberately trades some depth and continuity for operational clarity.
+
+### Human-in-the-loop is a feature, not a fallback
+
+The SSOT in this pattern is intentionally treated as an operational approximation that must stay legible to humans.
+
+- for high-stakes state (active blockers, commitments, approvals, financial decisions), explicit overwrite + human review is the preferred control
+- for lower-stakes pattern work (clustering, style trends, weak signals), fuzzier model-driven consolidation can be acceptable
+
+This is a deliberate design tradeoff: less automation purity, more correctness and accountability where mistakes are expensive.
 
 ### Control plane model
 
