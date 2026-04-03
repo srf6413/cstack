@@ -147,6 +147,24 @@ This is safer by design for most operator workflows, but you should still treat 
 
 ---
 
+## Where this model is not a fit
+
+cstack is great for recurring operational work. It is not the best choice for work that needs constant, real-time thinking.
+
+Examples people usually understand:
+
+- trading systems
+- live incident response
+- active security defense
+- robotic control systems
+
+Simple rule of thumb:
+
+- if the work looks like **read state -> decide -> write state -> wait**, cstack is a good fit
+- if the work needs **continuous monitoring and instant reactions**, use a continuous agent/runtime design
+
+---
+
 ## Heartbeat and Dispatch
 
 **Heartbeat** checks all assistants and sends one summary of items that need human decisions.
