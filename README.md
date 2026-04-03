@@ -28,15 +28,20 @@ Ask me these questions one at a time:
 After I answer, create these three files:
 
 **1. State file** — a Notion page with this structure:
-   - A Session Lock at the top (Status: IDLE/IN_PROGRESS, Last Agent, Timestamp)
+   - A Session Lock at the top with:
+     - Status: IDLE/IN_PROGRESS
+     - Lock Owner: unique run ID for this session
+     - Lock Expires At: timestamp
+     - Last Heartbeat: timestamp
    - An Agent Status section (what the agent did last time, what it needs from you)
    - One section per category from question 2, each with: Status, Current Blocker,
      Next Action, Running Log
 
 **2. Skill file** — a markdown file with these rules:
-   - Session start: read the state file, check the lock, load current state
-   - Each tick: find the highest-priority item, do autonomous work, update state, notify if stuck
-   - Session end: write all changes, release the lock
+   - Session start: read the state file, check lock lease, load current state
+   - Lock rule: if lock is IN_PROGRESS and not expired, exit; if expired, safely take over
+   - Each tick: find highest-priority item, do autonomous work, update state, refresh lock heartbeat
+   - Session end: write all changes, release lock only if you still own it
    - Hard constraints: whatever I said the agent should never do
 
 **3. Scheduled task prompt** — a short prompt I can paste into Cowork to run this on a schedule.
@@ -84,6 +89,9 @@ Tell the setup prompt: *"DJ gig booking agent, tracks venues I've contacted and 
 
 ## Session Lock
 **Status:** IDLE
+**Lock Owner:** none
+**Lock Expires At:** none
+**Last Heartbeat:** none
 
 ## Agent Status
 **Last Run:** 2026-03-28 9:00am
@@ -111,17 +119,31 @@ Tell the setup prompt: *"DJ gig booking agent, tracks venues I've contacted and 
 # DJ Gig Booking Agent
 
 ## Session Start
-1. Read state file. Check Session Lock — if IN_PROGRESS under 20 min, EXIT.
-2. Set lock to IN_PROGRESS. Load Agent Status.
+1. Generate a run ID (example: `dj-agent-2026-03-28T09:00:00Z`).
+2. Read state file and inspect Session Lock.
+3. If `Status=IN_PROGRESS` and `Lock Expires At` is still in the future, EXIT.
+4. Otherwise claim lock:
+   - `Status=IN_PROGRESS`
+   - `Lock Owner=<run ID>`
+   - `Lock Expires At=<now + 45 minutes>`
+   - `Last Heartbeat=<now>`
 
 ## Each Tick
 1. Active outreach — check for replies, flag anything needing approval.
 2. Follow-ups — draft follow-up for any venue silent 7+ days.
 3. Research — find new venues if queue is low.
-4. Update state file. Update Agent Status summary.
+4. Update state file and Agent Status summary.
+5. Refresh lock lease:
+   - `Last Heartbeat=<now>`
+   - `Lock Expires At=<now + 45 minutes>`
 
 ## Session End
-Write changes. Release lock (set back to IDLE).
+1. Re-read Session Lock.
+2. If `Lock Owner` is still your run ID, release lock:
+   - `Status=IDLE`
+   - `Lock Owner=none`
+   - `Lock Expires At=none`
+3. If lock owner changed, do not overwrite lock; just exit.
 
 ## Never
 - Send a message without human approval
@@ -161,7 +183,7 @@ Three pieces per agent:
 
 **Schedule** — a Cowork scheduled session. The session fires, the agent reads its state, does work, writes back, sleeps. No server running between sessions.
 
-**The session lock** prevents two sessions from writing simultaneously. The agent checks a lock field at the top of the state file: if another session is IN_PROGRESS within the last 20 minutes, it exits. Otherwise it sets the lock, does its work, and releases it. Distributed coordination in five lines of markdown.
+**The session lock** prevents overlapping writes with a lightweight lease. Each run claims the lock with a unique owner ID and expiry time. If another run is active and the lease hasn't expired, the new run exits. If a run crashes, the lease expires automatically so the next run can recover. Simple, readable coordination in markdown — safer than a basic "IN_PROGRESS for 20 minutes" flag.
 
 **Domain isolation by design.** Agents don't share state files — they can't interfere. Cross-domain context is opt-in: define it explicitly in the skill file if you want one agent to feed another.
 
