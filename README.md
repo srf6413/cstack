@@ -4,7 +4,7 @@ Set up a personal AI assistant in minutes. It handles recurring tasks, keeps not
 
 If you can describe a workflow in plain English, you can run cstack.
 
-## TL;DR for operators (30 seconds)
+## TL;DR (30 seconds)
 
 cstack is like hiring a team of reliable virtual assistants who work from one shared notebook in Notion.
 
