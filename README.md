@@ -177,12 +177,69 @@ cstack intentionally avoids an always-on agent process:
 
 This limits hidden runtime drift and keeps behavior inspectable.
 
+### Externalized cognition thesis
+
+cstack assumes that useful cognition can be reconstructed on demand from explicit state.
+
+Working model:
+
+- cognition for a run = state + retrieval + reasoning
+- continuity comes from SSOT quality, not a persistent internal process
+- proactive behavior comes from scheduling + clear goals, not an always-on daemon
+
+Why this works well:
+
+- most operational work is reconstructible from goals, history, constraints, and current tasks
+- hard resets reduce hidden drift and keep alignment visible
+- explicit state makes audit and handoff easier across runs and assistants
+
+Where this model breaks:
+
+- retrieval is not the same as open-ended exploration
+- writebacks are lossy compressions of reasoning (dead ends and alternatives are often dropped)
+- reconstruction is framing-sensitive, so different runs may rebuild slightly different context
+- discrete runs are less responsive than truly continuous processing for real-time flows
+
+Bottom line: cstack maximizes explicit cognition for reliability and inspectability; it deliberately trades some depth and continuity for operational clarity.
+
 ### Control plane model
 
 - **state file** is durable truth for each assistant
 - **skill file** is behavior contract
 - **schedule** is autonomy trigger
 - **heartbeat/dispatch** are coordination and escalation surfaces
+
+### Parallel assistants without coordination hell
+
+For most workloads, cstack keeps parallel execution simple:
+
+- each assistant owns its own state file
+- assistants do not share in-memory context
+- each run is short-lived and resumes from file state
+
+This reduces coupling and limits blast radius when one assistant fails.
+
+Important caveat: this does not remove coordination entirely. Cross-assistant handoffs still need explicit contracts, and lease locks remain best-effort (non-atomic).
+
+### Notion + MCP: where the pattern is strong, and where it bends
+
+Using Notion through MCP is a major reason this pattern is accessible:
+
+- `notion-search` and `notion-fetch` make context retrieval simple
+- `notion-create-pages` and `notion-update-page` support readable state writes
+- `notion-query-database-view` helps with pre-filtered operational views
+- `notion-update-data-source` enables schema evolution without writing backend code
+
+At larger scale, treat Notion as an operational store, not a high-concurrency transactional database:
+
+- schema discipline is soft unless you enforce strict templates and property conventions
+- write quality can degrade over time if many assistants update the same structures
+- concurrency guarantees are limited for race-sensitive coordination
+
+Practical guidance:
+
+- up to ~10-20 assistants, this model is usually manageable with good conventions
+- beyond ~100 assistants, expect quality and coordination degradation unless you add stronger orchestration and storage controls
 
 ### Why this differs from always-on frameworks
 
