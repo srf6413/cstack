@@ -131,7 +131,7 @@ cstack is designed to reduce risk for normal business workflows:
 
 - **No persistent runtime:** each run starts clean, does work, writes state, exits.
 - **Lease lock:** lock owner + expiry + heartbeat reduce overlapping writes.
-- **Decision gates:** define actions that always require approval (send/spend/delete).
+- **Decision gates:** policy prompts that require approval for send/spend/delete actions; treat these as governance controls, not hard enforcement.
 - **Kill switch:** disable the schedule and the loop stops.
 
 This is safer by design for most operator workflows, but you should still treat state, transcripts, and credentials as sensitive data.
