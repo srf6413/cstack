@@ -4,7 +4,7 @@ Set up a personal AI assistant in minutes. It handles recurring tasks, keeps not
 
 If you can describe a workflow in plain English, you can run cstack.
 
-## TL;DR (30 seconds)
+## TL;DR for operators (30 seconds)
 
 cstack is like hiring a team of reliable virtual assistants who work from one shared notebook in Notion.
 
@@ -14,6 +14,12 @@ cstack is like hiring a team of reliable virtual assistants who work from one sh
 - you steer everything from Dispatch (the control center you can use from your phone to check status, redirect work, and launch follow-ups)
 
 If you want architecture and tradeoffs, jump to **For technical readers (appendix)** below.
+
+### Reading paths
+
+- **New here?** Read through **Heartbeat and Dispatch**.
+- **Evaluating safety?** Read **Safety and boundaries** and **Known limits (current design)**.
+- **Technical deep dive?** Jump to **For technical readers (appendix)**.
 
 ---
 
@@ -351,7 +357,7 @@ Practical guidance:
 
 ## Glossary
 
-- **Dispatch:** a feature in the Claude app that lets you check status, steer work, and launch follow-ups from one chat window in the app. It also lets you upload images and files from your phone, and voice mode.
+- **Dispatch:** a feature in the Claude app that lets you check status, steer work, and launch follow-ups from one chat window.
 - **SSOT:** single source of truth. In this pattern, your Notion state pages.
 - **Heartbeat:** a scheduled checker that summarizes what needs human decisions.
 
