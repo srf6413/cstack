@@ -138,6 +138,14 @@ This is safer by design for most operator workflows, but you should still treat 
 
 ---
 
+## Known limits (current design)
+
+- **Locking is lease-based, not atomic.** A read-check-write race is still possible under concurrent starts.
+- **Heartbeat currently scans all state files each run.** This is simple, but it scales poorly as the number of assistants grows.
+- **No separate server runtime does not mean no runtime dependency.** cstack still depends on your local Claude/Cowork environment being available.
+
+---
+
 ## Heartbeat and Dispatch
 
 **Heartbeat** checks all assistants and sends one summary of items that need human decisions.
