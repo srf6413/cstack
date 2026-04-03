@@ -1,88 +1,189 @@
-# Run Autonomous AI Agents With No Code, No Servers, Just Claude
+# cstack: AI assistants for recurring work
 
-Imagine you hired someone for every area of your life. Each person has a notebook — that's their memory. A job description — those are their rules. A shift they show up for. And one instruction: *"Reach out only if something is actually stuck. Everything else, handle it."*
+Set up a personal AI assistant in minutes. It handles recurring tasks, keeps notes up to date, and only pings you when it is actually stuck.
 
-That's cstack. The notebook is a Notion page. The job description is a text file. The shift is a scheduled Claude session. No servers. No code. No API keys. No terminal.
-
-If you can write a job description in plain English, you can have an autonomous agent.
+If you can describe a workflow in plain English, you can run cstack.
 
 ---
 
-## Try It Right Now
+## Who this is for
 
-**You'll need a free [Notion account](https://www.notion.so)** — that's where your agent stores its memory. Everything else runs inside Claude.
+This is for non-technical operators:
 
-Paste this into [Claude Cowork](https://claude.ai) or claude.ai, answer six questions, and you'll have a running agent in under 5 minutes:
+- freelancers juggling client follow-ups
+- founders handling ops and outreach
+- small teams managing recurring admin work
+
+No servers. No coding. No local runtime to maintain.
+
+---
+
+## What problem this solves
+
+Most people do not need a fully autonomous coding agent with system-level access. They need reliable help with repeating work:
+
+- follow-ups that fall through the cracks
+- too much context switching and mental overhead
+- repetitive status updates and coordination tasks
+
+cstack turns these into repeatable loops with clear boundaries.
+
+---
+
+## First-day payoff
+
+In your first run, you should get:
+
+- one working assistant for one domain (for example, client follow-up)
+- a clean state page that remembers progress between runs
+- a summary of what changed and what needs your decision
+
+You should feel, "This saved me time today."
+
+---
+
+## How it works (simple)
+
+Think of each assistant as a person with:
+
+- a **notebook** (state file) for memory
+- a **job description** (skill file) for behavior
+- a **shift schedule** (scheduled session) for when to work
+
+That is it.
+
+---
+
+## Try it in 5 minutes
+
+**You'll need a free [Notion account](https://www.notion.so)** for state. Everything else runs inside Claude.
+
+Paste this into [Claude Cowork](https://claude.ai), answer six questions, and it will generate your setup:
 
 ```
-You are helping me create a new autonomous agent for a domain in my life or work.
+You are helping me create a new AI assistant for one recurring part of my work or life.
 Ask me these questions one at a time:
 
-1. What domain is this for? (e.g., DJ gig booking, content calendar, project tracking, hiring, client follow-ups)
-2. What should this agent track? Give me the categories. (e.g., venues I've contacted, warm leads, cold prospects, content ideas)
-3. What can this agent do without asking me? (e.g., research new prospects, draft messages, update statuses)
-4. What should this agent NEVER do? (e.g., send messages, spend money, delete anything)
-5. How should it reach me when it's stuck? (Discord, text, email, or just write it down and wait)
-6. How often should it run? (every hour, every morning, twice a day)
+1. What domain is this for? (examples: client follow-ups, content planning, hiring pipeline, appointment management)
+2. What should this assistant track? List categories.
+3. What can it do without asking me?
+4. What should it never do?
+5. How should it reach me when it needs a decision?
+6. How often should it run?
 
-After I answer, create these three files:
+After I answer, create these 3 assets:
 
-**1. State file** — a Notion page with this structure:
-   - A Session Lock at the top with:
+1) State file (Notion page):
+   - Session Lock:
      - Status: IDLE/IN_PROGRESS
-     - Lock Owner: unique run ID for this session
+     - Lock Owner: unique run ID
      - Lock Expires At: timestamp
      - Last Heartbeat: timestamp
-   - An Agent Status section (what the agent did last time, what it needs from you)
-   - One section per category from question 2, each with: Status, Current Blocker,
-     Next Action, Running Log
+   - Agent Status section:
+     - Last Run
+     - Summary
+     - Needs Human
+   - One section per category with:
+     - Status
+     - Current Blocker
+     - Next Action
+     - Running Log
 
-**2. Skill file** — a markdown file with these rules:
-   - Session start: read the state file, check lock lease, load current state
-   - Lock rule: if lock is IN_PROGRESS and not expired, exit; if expired, safely take over
-   - Each tick: find highest-priority item, do autonomous work, update state, refresh lock heartbeat
-   - Session end: write all changes, release lock only if you still own it
-   - Hard constraints: whatever I said the agent should never do
+2) Skill file (markdown rules):
+   - Session start: read state + check lock lease
+   - Lock rule: if lock is active and not expired, exit; if expired, safely take over
+   - Each tick: do highest-priority work, update state, refresh heartbeat
+   - Session end: release lock only if lock owner is this run
+   - Hard constraints: enforce the "never do" list
 
-**3. Scheduled task prompt** — a short prompt I can paste into Cowork to run this on a schedule.
+3) Scheduled task prompt:
+   - short prompt to run on a schedule in Cowork
 
-Present all three for me to review. Keep the language plain — no jargon.
+Use plain language and avoid jargon.
 ```
 
 ---
 
-## What You Get
+## Instant wins: 3 starter templates
 
-**One agent per domain.** Outreach. Research. Client follow-ups. Content. Each runs on its own schedule, keeps its own memory, and does real ongoing work — not a one-shot task, but a process that picks up exactly where it left off every time it wakes up.
+Start with one template before building anything custom:
 
-**The perfect amount of human in the loop — by design.** New blocker? The agent pings you immediately. Already told you? It won't keep notifying you about the same thing. All green? You hear nothing. You unblock what needs you and walk away.
+1. **Client Follow-up Assistant**
+   - tracks open conversations
+   - drafts follow-ups
+   - flags only contacts that need your approval
 
-**The Heartbeat.** One extra agent reads everyone else's notebooks and sends you a single summary of anything waiting on a decision. Five minutes to unblock everything. If nothing needs you, silence.
+2. **Content Pipeline Assistant**
+   - tracks ideas, drafts, and publish steps
+   - creates weekly draft queues
+   - flags blockers for your decision
 
-```
-You are the heartbeat agent. Your only job is to check on all my other agents.
+3. **Weekly Ops Assistant**
+   - reviews recurring tasks every week
+   - updates status and next actions
+   - sends one decision summary instead of many pings
 
-Here are the state files you monitor:
-[list your state file locations here]
+---
 
-Every time you run:
+## Safety and boundaries
+
+cstack is designed to reduce risk for normal business workflows:
+
+- **No persistent runtime:** each run starts clean, does work, writes state, exits.
+- **Lease lock:** lock owner + expiry + heartbeat reduce overlapping writes.
+- **Decision gates:** define actions that always require approval (send/spend/delete).
+- **Kill switch:** disable the schedule and the loop stops.
+
+This is safer by design for most operator workflows, but you should still treat state, transcripts, and credentials as sensitive data.
+
+---
+
+## Heartbeat and Dispatch
+
+**Heartbeat** checks all assistants and sends one summary of items that need human decisions.
+
+```text
+You are the heartbeat assistant. Your only job is to check all state files.
+
+Every run:
 1. Read each state file
-2. Find anything marked "Needs Human"
-3. Send me one summary. If nothing needs me, say nothing.
-4. Never modify another agent's state file. Read only.
-
-Schedule: every 30 minutes.
+2. Find items marked "Needs Human"
+3. Send one summary
+4. If nothing needs human input, send nothing
+5. Never modify other assistants' state files
 ```
 
-**Dispatch.** Claude's built-in control plane. Fire a session immediately without waiting for the schedule. Check what any agent is doing right now. Change a rule, adjust a schedule, pivot an agent's focus — without touching a config file. Leave Cowork running on your computer, walk out the door, and your agents keep working. Dispatch is how you reach them from anywhere.
+**Dispatch** is your remote control gateway: check status, redirect work, and trigger sessions from your phone without changing system internals.
 
 ---
 
-## Example: What the Agent Produces
+## For technical readers (appendix)
 
-Tell the setup prompt: *"DJ gig booking agent, tracks venues I've contacted and new spots to reach out to, can research venues and draft messages but never send them, ping me on Discord when stuck, run every morning."*
+### Stateless architecture
 
-**State file (the agent's memory)**
+cstack intentionally avoids an always-on agent process:
+
+- scheduled sessions wake up
+- read/write explicit state
+- exit after each run
+
+This limits hidden runtime drift and keeps behavior inspectable.
+
+### Control plane model
+
+- **state file** is durable truth for each assistant
+- **skill file** is behavior contract
+- **schedule** is autonomy trigger
+- **heartbeat/dispatch** are coordination and escalation surfaces
+
+### Why this differs from always-on frameworks
+
+- no long-lived daemon required for basic workflows
+- no local process with constant tool access
+- simpler failure recovery (next run resumes from state)
+- easier auditability (human-readable state and rules)
+
+### Example state and skill
 
 ```markdown
 # DJ Gig Booking — State
@@ -97,105 +198,21 @@ Tell the setup prompt: *"DJ gig booking agent, tracks venues I've contacted and 
 **Last Run:** 2026-03-28 9:00am
 **Summary:** Researched 4 new venues in SF. Drafted intro for The Independent.
 **Needs Human:** Yes — approve outreach draft for The Independent
-
-## Venues — Active Outreach
-
-### The Independent
-**Status:** Draft Ready
-**Current Blocker:** Waiting for human to approve outreach message
-**Next Action:** Send once approved
-**Running Log:**
-- [2026-03-28] Found booker contact. Drafted intro referencing their hip-hop Thursdays.
-
-### Milk Bar
-**Status:** Waiting
-**Current Blocker:** No reply after first message (sent 2026-03-23)
-**Next Action:** Draft follow-up if no reply by day 7
 ```
-
-**Skill file (the agent's rules)**
 
 ```markdown
 # DJ Gig Booking Agent
 
 ## Session Start
-1. Generate a run ID (example: `dj-agent-2026-03-28T09:00:00Z`).
-2. Read state file and inspect Session Lock.
-3. If `Status=IN_PROGRESS` and `Lock Expires At` is still in the future, EXIT.
-4. Otherwise claim lock:
-   - `Status=IN_PROGRESS`
-   - `Lock Owner=<run ID>`
-   - `Lock Expires At=<now + 45 minutes>`
-   - `Last Heartbeat=<now>`
-
-## Each Tick
-1. Active outreach — check for replies, flag anything needing approval.
-2. Follow-ups — draft follow-up for any venue silent 7+ days.
-3. Research — find new venues if queue is low.
-4. Update state file and Agent Status summary.
-5. Refresh lock lease:
-   - `Last Heartbeat=<now>`
-   - `Lock Expires At=<now + 45 minutes>`
+1. Generate run ID.
+2. Read lock.
+3. If lock is active and unexpired, EXIT.
+4. Else claim lock with owner + expiry + heartbeat.
 
 ## Session End
-1. Re-read Session Lock.
-2. If `Lock Owner` is still your run ID, release lock:
-   - `Status=IDLE`
-   - `Lock Owner=none`
-   - `Lock Expires At=none`
-3. If lock owner changed, do not overwrite lock; just exit.
-
-## Never
-- Send a message without human approval
-- Book a gig without human sign-off
-- Delete a venue from the pipeline
+1. Re-read lock.
+2. Release only if lock owner matches this run.
 ```
-
-Change "gig booking" to anything — hiring, client delivery, content planning, finances. Same pattern, same structure.
-
----
-
-## Why Not OpenClaw?
-
-|  | OpenClaw | cstack |
-|---|---|---|
-| Computer control | Full desktop (unsafe) | Sandboxed with Cowork's safeguards |
-| Browser use | Build flows manually with Playwright | Claude Chrome connector — plain English, safety built in |
-| Infrastructure | Custom framework | None |
-| Setup | Hours | Minutes |
-| Technical skill | Developer | Anyone |
-| Safety | You're on your own | Built in |
-| Memory | A bunch of markdown files | A bunch of markdown files |
-
-OpenClaw proved everyone wants autonomous agents. It also proved that handing an AI unrestricted access to your computer is a security disaster — multiple critical CVEs, 12% of its plugin registry contained malicious code, Kaspersky and Cisco both published "don't use this" advisories.
-
-cstack is the same idea with the unsafe parts removed.
-
----
-
-## How It Works
-
-Three pieces per agent:
-
-**State file** — a Notion page the agent reads at the start of every session and writes back to at the end. That's the memory. No database, no vector store. Just a structured text file.
-
-**Skill file** — a markdown file with rules. Read your state first. Work on the highest-priority item. Write what you did. Reach out only if something is actually stuck. The agent reads this every session. That's the identity.
-
-**Schedule** — a Cowork scheduled session. The session fires, the agent reads its state, does work, writes back, sleeps. No server running between sessions.
-
-**The session lock** prevents overlapping writes with a lightweight lease. Each run claims the lock with a unique owner ID and expiry time. If another run is active and the lease hasn't expired, the new run exits. If a run crashes, the lease expires automatically so the next run can recover. Simple, readable coordination in markdown — safer than a basic "IN_PROGRESS for 20 minutes" flag.
-
-**Domain isolation by design.** Agents don't share state files — they can't interfere. Cross-domain context is opt-in: define it explicitly in the skill file if you want one agent to feed another.
-
----
-
-## The Real Shift
-
-Until now, building an AI agent was an engineering problem — servers, API keys, Python scripts, debugging infrastructure. cstack flips it into a design problem.
-
-99% of knowledge workers will never open a terminal. If the solution requires `npm install`, you've already lost most of the people who actually need this. cstack runs entirely inside tools you already have: a browser and Notion.
-
-If you can describe how your workflow works in plain English, you can build an autonomous agent. That's not a hack. That's the actual future — and it belongs to everyone, not just developers.
 
 ---
 
