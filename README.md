@@ -275,6 +275,8 @@ Many AI tools keep memory in opaque internals or buried settings. cstack puts me
 
 The goal is not to hide memory mechanics. The goal is to make memory inspectable enough that human review can continuously catch drift and bad writebacks.
 
+Compaction is intentionally human-governed in this model. As state grows, you can merge and trim memory artifacts, but the process stays explicit and reviewable so correctness is not hidden behind an opaque background process.
+
 ### Control plane model
 
 - **state file** is durable operational state for each assistant (not perfect truth)
