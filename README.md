@@ -212,9 +212,19 @@ The SSOT in this pattern is intentionally treated as an operational approximatio
 
 This is a deliberate design tradeoff: less automation purity, more correctness and accountability where mistakes are expensive.
 
+### Memory is visible, not hidden
+
+Many AI tools keep memory in opaque internals or buried settings. cstack puts memory artifacts front and center:
+
+- Notion SSOT pages are primary operational state
+- rule files are explicit and reviewable
+- updates are expected to be checked regularly for correctness
+
+The goal is not to hide memory mechanics. The goal is to make memory inspectable enough that human review can continuously catch drift and bad writebacks.
+
 ### Control plane model
 
-- **state file** is durable truth for each assistant
+- **state file** is durable operational state for each assistant (not perfect truth)
 - **skill file** is behavior contract
 - **schedule** is autonomy trigger
 - **heartbeat/dispatch** are coordination and escalation surfaces
