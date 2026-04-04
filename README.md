@@ -1,6 +1,6 @@
 # cstack: AI assistants for recurring work
 
-Set up a personal AI assistant in minutes. It handles recurring tasks, keeps notes up to date, and only pings you when it is actually stuck. You manage it from one place through Dispatch.
+Set up a personal AI assistant in minutes. It handles recurring tasks, keeps notes up to date, and only pings you when it is actually stuck. You manage it from one place through [Dispatch](#dispatch).
 
 If you can describe a workflow in plain English, you can run cstack.
 
@@ -11,7 +11,7 @@ cstack is like hiring a team of reliable virtual assistants who work from one sh
 - you describe the job once in plain English
 - they run on schedule and handle one task at a time
 - they keep state updated and only escalate when a human decision is needed
-- you steer everything from Dispatch (the control center you can use from your phone to check status, redirect work, and launch follow-ups)
+- you steer everything from [Dispatch](#dispatch) (the control center you can use from your phone to check status, redirect work, and launch follow-ups)
 
 If you want architecture and tradeoffs, jump to **For technical readers (appendix)** below.
 
@@ -381,9 +381,17 @@ Practical guidance:
 
 ## Glossary
 
-- **Dispatch:** a feature in the Claude app that lets you check status, steer work, and launch follow-ups from one chat window.
-- **SSOT:** single source of truth. In this pattern, your Notion state pages.
-- **Heartbeat:** a scheduled checker that summarizes what needs human decisions.
+### Dispatch
+
+A feature in the Claude app that lets you check status, steer work, and launch follow-ups from one chat window.
+
+### SSOT
+
+Single source of truth. In this pattern, your Notion state pages.
+
+### Heartbeat
+
+A scheduled checker that summarizes what needs human decisions.
 
 ---
 
