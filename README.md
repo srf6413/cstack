@@ -100,6 +100,8 @@ After I answer, create these 3 assets:
      - Last Run
      - Summary
      - Needs Human
+   - Optional: Roadmap table for goal tracking:
+     - Goal | Metric | Current | Target | Delta
    - One section per category with:
      - Status
      - Current Blocker
@@ -284,6 +286,14 @@ Compaction is intentionally human-governed in this model. As state grows, you ca
 - **schedule** is autonomy trigger
 - **heartbeat/dispatch** are coordination and escalation surfaces
 - **Dispatch** is the single command surface for human steering across sessions
+
+### Optional roadmap fields (no new lifecycle)
+
+You can add an optional `Roadmap` table to any state file:
+
+- `Goal | Metric | Current | Target | Delta`
+
+When used, agents update `Current` and `Delta` during their normal write-state phase. This adds goal tracking without introducing new lock semantics, schedules, or agent types.
 
 ### Parallel assistants without coordination hell
 
