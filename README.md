@@ -17,7 +17,7 @@ If you want architecture and tradeoffs, jump to **For technical readers (appendi
 
 ### Reading paths
 
-- **New here?** Keep reading below (and here's the [Glossary](#glossary)).
+- **New here?** Keep reading chronologically below (unless you need the [Glossary](#glossary)).
 - **Evaluating safety?** Read **Safety and boundaries** and **Known limits (current design)**.
 - **Technical deep dive?** Jump to **For technical readers (appendix)**.
 
