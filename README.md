@@ -297,6 +297,16 @@ When used, agents update `Current` and `Delta` during their normal write-state p
 
 Use consistent units for `Metric`, `Current`, and `Target`. Treat `Delta` as a convenience field; if it conflicts, `Current` and `Target` are the source of truth.
 
+### Ephemeral vs persistent assistants
+
+Use the assistant lifecycle that matches the job:
+
+- **Ephemeral assistant:** for a one-time goal or deadline (for example, event launch or campaign sprint). Run on schedule until the goal/date is reached, then stop the schedule and archive or clean up the state file.
+- **Seasonal assistant:** for recurring windows during part of the year (for example, tax season). Enable during the active period and pause outside it.
+- **Persistent assistant:** for ongoing domain operations (for example, pipeline tracking or recurring follow-ups). Keep schedule and state active over time.
+
+This keeps the system lean and avoids leaving stale automations running after work is done. In Cowork, these schedules can be configured in natural language.
+
 ### Parallel assistants without coordination hell
 
 For most workloads, cstack keeps parallel execution simple:
