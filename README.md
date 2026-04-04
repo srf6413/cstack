@@ -295,6 +295,8 @@ You can add an optional `Roadmap` table to any state file:
 
 When used, agents update `Current` and `Delta` during their normal write-state phase. This adds goal tracking without introducing new lock semantics, schedules, or agent types.
 
+Use consistent units for `Metric`, `Current`, and `Target`. Treat `Delta` as a convenience field; if it conflicts, `Current` and `Target` are the source of truth.
+
 ### Parallel assistants without coordination hell
 
 For most workloads, cstack keeps parallel execution simple:
